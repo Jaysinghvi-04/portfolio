@@ -1,0 +1,5 @@
+{
+  "name": "Jay Portfolio Terminal",
+  "description": "A creative, hacker-style personal portfolio website that simulates a retro terminal or modern CLI interface. Visitors can navigate through sections like 'about', 'skills', 'projects', and 'contact' by using simulated commands.",
+  "requestFramePermissions": []
+}
