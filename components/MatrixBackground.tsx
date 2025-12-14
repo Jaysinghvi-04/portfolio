@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect } from 'react';
 
 const MatrixBackground: React.FC = () => {
@@ -30,7 +31,7 @@ const MatrixBackground: React.FC = () => {
             ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
             ctx.fillRect(0, 0, w, h);
 
-            ctx.fillStyle = '#0F0';
+            ctx.fillStyle = '#50fa7b'; // kali-green
             ctx.font = '15pt monospace';
 
             columns.forEach((y, i) => {
@@ -55,7 +56,7 @@ const MatrixBackground: React.FC = () => {
 
     }, []);
 
-    return <canvas ref={canvasRef} className="fixed top-0 left-0 w-full h-full z-0" />;
+    return <canvas ref={canvasRef} className="fixed top-0 left-0 w-full h-full z-0 blur-sm" />;
 };
 
 export default MatrixBackground;

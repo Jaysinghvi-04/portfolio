@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Command } from '../../types';
 
@@ -19,12 +20,12 @@ const Help: React.FC<HelpProps> = ({ onCommandClick, isOutput }) => {
     if (isOutput) {
         return (
             <div className="w-full">
-                <p className="mb-2">Available commands:</p>
-                <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-1">
+                <p className="mb-2 text-kali-green">Available commands:</p>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1">
                     {commands.map(({ cmd, desc }) => (
-                        <li key={cmd} className="flex items-center">
-                            <span className="text-cyan-400 w-24 inline-block">{cmd}</span>
-                            <span className="text-gray-400">- {desc}</span>
+                        <li key={cmd} className="flex items-start">
+                            <span className="text-kali-blue w-20 inline-block flex-shrink-0">{cmd}</span>
+                            <span className="text-kali-white">- {desc}</span>
                         </li>
                     ))}
                 </ul>
@@ -34,13 +35,13 @@ const Help: React.FC<HelpProps> = ({ onCommandClick, isOutput }) => {
 
     return (
         <div className="w-full">
-            <p className="text-gray-400 text-xs mb-1">Click a command to execute it, or use Tab to autocomplete.</p>
+            <p className="text-kali-gray text-xs mb-1">Click a command to execute it, or use Tab to autocomplete.</p>
             <div className="flex flex-wrap gap-x-4 gap-y-1">
                  {commands.map(({ cmd }) => (
                     <button
                         key={cmd}
                         onClick={() => onCommandClick(cmd)}
-                        className="text-cyan-400 hover:underline hover:text-cyan-300 transition-colors duration-200 text-xs sm:text-sm"
+                        className="text-kali-cyan hover:underline hover:text-kali-blue transition-colors duration-200 text-xs sm:text-sm"
                     >
                         {cmd}
                     </button>

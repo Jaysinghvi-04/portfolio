@@ -21,7 +21,6 @@ const Terminal: React.FC = () => {
     
     const terminalRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
-    const idleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     // State for window management
     const [isLoaded, setIsLoaded] = useState(false);
@@ -48,7 +47,7 @@ const Terminal: React.FC = () => {
             const newWidth = Math.min(900, vw - 40);
             const newHeight = Math.min(600, vh - 40);
             setSize({ width: newWidth, height: newHeight });
-            setPosition({ x: 0, y: 0 }); // Recenter on resize
+            setPosition({ x: (vw - newWidth) / 2, y: (vh - newHeight) / 2 });
         };
 
         updateLayout();
@@ -146,40 +145,6 @@ const Terminal: React.FC = () => {
     const handleCommandClick = (command: Command) => {
         executeCommand(command);
     };
-
-    useEffect(() => {
-        const resetTimer = () => {
-            if (idleTimerRef.current) {
-                clearTimeout(idleTimerRef.current);
-            }
-            idleTimerRef.current = setTimeout(() => {
-                if (isWelcomeComplete) {
-                    setLines(prev => [
-                        ...prev,
-                        {
-                            id: Date.now(),
-                            type: 'output',
-                            content: <span className="text-gray-500 italic">SYSTEM_MSG: Still there, human?</span>
-                        }
-                    ]);
-                }
-            }, 30000); // 30 seconds
-        };
-
-        const activityHandler = () => resetTimer();
-        window.addEventListener('mousemove', activityHandler);
-        window.addEventListener('keydown', activityHandler);
-        
-        resetTimer();
-
-        return () => {
-            if (idleTimerRef.current) {
-                clearTimeout(idleTimerRef.current);
-            }
-            window.removeEventListener('mousemove', activityHandler);
-            window.removeEventListener('keydown', activityHandler);
-        };
-    }, [isWelcomeComplete]);
     
     const onWelcomeComplete = () => {
         setLines(prev => [...prev, {id: welcomeLinesCount, type: 'output', content: WELCOME_MESSAGES[welcomeLinesCount]}]);
@@ -243,35 +208,36 @@ const Terminal: React.FC = () => {
     
     return (
         <div 
-            className={`relative bg-black/70 backdrop-blur-sm border-2 border-green-700/50 shadow-lg shadow-green-500/20 rounded-lg flex flex-col font-mono text-sm md:text-lg text-glow terminal-container transform transition-all duration-300 ${isLoaded ? 'scale-100 opacity-100' : 'scale-95 opacity-0'}`}
+            className={`terminal-container absolute bg-kali-black/80 backdrop-blur-sm border-2 border-kali-gray shadow-lg shadow-kali-blue/20 rounded-lg flex flex-col font-mono text-sm md:text-base text-[#FFB000] transform transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
             style={{
                 width: size.width > 0 ? `${size.width}px` : 'auto',
                 height: size.height > 0 ? `${size.height}px` : 'auto',
+                top: `${position.y}px`,
+                left: `${position.x}px`,
                 visibility: size.width > 0 ? 'visible' : 'hidden',
-                transform: `translate(${position.x}px, ${position.y}px)`,
                 touchAction: 'none'
             }}
             onClick={() => inputRef.current?.focus()}
         >
             <div 
-                className="bg-gray-800/80 p-2 rounded-t-lg flex items-center border-b-2 border-green-700/50 cursor-move"
+                className="bg-kali-gray p-2 rounded-t-lg flex items-center border-b-2 border-kali-gray cursor-move"
                 onMouseDown={handleDragStart}
             >
-                <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-red-500 mr-2 border-2 border-red-900/50"></div>
-                <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-yellow-500 mr-2 border-2 border-yellow-900/50"></div>
-                <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-green-500 border-2 border-green-900/50"></div>
-                <span className="ml-auto text-gray-400 text-xs md:text-base select-none">jay@portfolio</span>
+                <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-kali-red mr-2"></div>
+                <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-kali-yellow mr-2"></div>
+                <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-kali-green"></div>
+                <span className="ml-auto text-[#FFB000] text-xs md:text-base select-none">root@jay</span>
             </div>
-            <div ref={terminalRef} className="flex-1 p-4 overflow-y-auto terminal-scrollbar text-sm md:text-base terminal-grid-bg">
+            <div ref={terminalRef} className="flex-1 p-4 overflow-y-auto terminal-scrollbar text-sm md:text-base">
                 {lines.map(line => (
                     <div key={line.id} className="mb-2">
                          {line.type === 'input' ? (
                              <div className="flex items-center">
-                                <span className="text-cyan-400 mr-2">[jay@portfolio]$</span>
-                                <span>{line.content}</span>
+                                <span className="text-[#FFB000] mr-2">[root@jay]~#</span>
+                                <span className="text-[#FFB000]">{line.content}</span>
                              </div>
                          ) : (
-                            <div className="whitespace-pre-wrap">{line.content}</div>
+                            <div className="whitespace-pre-wrap text-[#FFB000]">{line.content}</div>
                          )
                          }
                     </div>
@@ -289,13 +255,12 @@ const Terminal: React.FC = () => {
 
                  {isWelcomeComplete && (
                     <form onSubmit={handleSubmit} className="flex items-center">
-                        <label htmlFor="command-input" className="text-cyan-400 mr-2">[jay@portfolio]$</label>
+                        <label htmlFor="command-input" className="text-[#FFB000] mr-2">[root@jay]~#</label>
                         <input
                             ref={inputRef}
                             id="command-input"
                             type="text"
-                            className="bg-transparent border-none text-green-400 focus:outline-none w-full text-glow text-sm md:text-base"
-                            style={{caretColor: 'transparent'}}
+                            className="bg-transparent border-none text-[#FFB000] focus:outline-none w-full text-sm md:text-base"
                             value={inputValue}
                             onChange={(e) => setInputValue(e.target.value)}
                             onKeyDown={handleKeyDown}
@@ -306,18 +271,18 @@ const Terminal: React.FC = () => {
                             autoCorrect="off"
                             spellCheck="false"
                         />
-                         {isFocused && <span className="bg-green-400 w-2 h-4 md:w-2.5 md:h-5 inline-block animate-pulse -ml-1" />}
+                         {isFocused && <span className="bg-[#FFB000] w-2 h-4 md:w-2.5 md:h-5 inline-block animate-pulse" />}
                     </form>
                 )}
             </div>
-            <div className="bg-gray-800/50 p-2 border-t-2 border-green-700/50 rounded-b-lg">
+            <div className="bg-kali-gray p-2 border-t-2 border-kali-gray rounded-b-lg">
                 <Help onCommandClick={handleCommandClick} isOutput={false} />
             </div>
             <div 
                 className="absolute bottom-0 right-0 w-5 h-5 cursor-se-resize"
                 onMouseDown={handleResizeStart}
             >
-                <svg className="w-full h-full text-green-700/50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-full h-full text-kali-gray" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4h4m12 12v-4h-4m-4-4L4 20M20 4L8 16" />
                 </svg>
             </div>
