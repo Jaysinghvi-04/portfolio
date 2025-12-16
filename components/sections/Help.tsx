@@ -24,7 +24,7 @@ const Help: React.FC<HelpProps> = ({ onCommandClick, isOutput }) => {
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1">
                     {commands.map(({ cmd, desc }) => (
                         <li key={cmd} className="flex items-start">
-                            <span className="text-kali-blue w-20 inline-block flex-shrink-0">{cmd}</span>
+                            <span className="text-kali-cyan font-bold w-20 inline-block flex-shrink-0">{cmd}</span>
                             <span className="text-kali-white">- {desc}</span>
                         </li>
                     ))}

@@ -1,32 +1,32 @@
-
-
-
-
 import React from 'react';
-import { CONTACT_INFO } from '../../constants';
 
 const Contact: React.FC = () => {
   return (
-    <div className="w-full">
-        <p className="mb-2 text-kali-green">Contact channels open. Transmit when ready.</p>
-        <ul>
-            <li className="flex items-start">
-                <span className="text-kali-blue w-28 inline-block flex-shrink-0">Email:</span>
-                <a href={`mailto:${CONTACT_INFO.email}`} className="hover:underline break-all text-kali-white">{CONTACT_INFO.email}</a>
-            </li>
-            <li className="flex items-start">
-                <span className="text-kali-blue w-28 inline-block flex-shrink-0">LinkedIn:</span>
-                <a href={CONTACT_INFO.linkedin} target="_blank" rel="noopener noreferrer" className="hover:underline break-all text-kali-white">{CONTACT_INFO.linkedin}</a>
-            </li>
-            <li className="flex items-start">
-                <span className="text-kali-blue w-28 inline-block flex-shrink-0">GitHub:</span>
-                <a href={CONTACT_INFO.github} target="_blank" rel="noopener noreferrer" className="hover:underline break-all text-kali-white">{CONTACT_INFO.github}</a>
-            </li>
-            <li className="flex items-start">
-                <span className="text-kali-blue w-28 inline-block flex-shrink-0">TryHackMe:</span>
-                <a href={CONTACT_INFO.tryhackme} target="_blank" rel="noopener noreferrer" className="hover:underline break-all text-kali-white">{CONTACT_INFO.tryhackme}</a>
-            </li>
-        </ul>
+    <div className="space-y-2">
+      <div className="mb-4 text-gray-300">
+        Contact channels open. Transmit when ready.
+      </div>
+      
+      <div className="flex">
+        {/* MATCHING MATRIX GREEN (text-green-400) */}
+        <span className="text-green-400 font-bold w-24">Email:</span>
+        <a href="mailto:jaysinghvi54@gmail.com" className="text-gray-300 hover:text-white underline">jaysinghvi54@gmail.com</a>
+      </div>
+      
+      <div className="flex">
+        <span className="text-green-400 font-bold w-24">LinkedIn:</span>
+        <a href="https://www.linkedin.com/in/jay-singhvi-9498a1339/" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white underline">linkedin.com/in/jay-singhvi</a>
+      </div>
+      
+      <div className="flex">
+        <span className="text-green-400 font-bold w-24">GitHub:</span>
+        <a href="https://github.com/jaysinghvi-04" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white underline">github.com/jaysinghvi-04</a>
+      </div>
+
+      <div className="flex">
+        <span className="text-green-400 font-bold w-24">TryHackMe:</span>
+        <a href="https://tryhackme.com/p/jaysinghvi54" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white underline">tryhackme.com/p/jaysinghvi54</a>
+      </div>
     </div>
   );
 };

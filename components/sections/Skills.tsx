@@ -1,22 +1,36 @@
-
 import React from 'react';
-import { SKILLS } from '../../constants';
 
 const Skills: React.FC = () => {
   return (
-    <div className="w-full">
-      {SKILLS.map((skill, index) => (
-        <div key={index} className="mb-3">
-          <h3 className="text-kali-blue font-bold mb-1">{skill.category}</h3>
-          <div className="flex flex-wrap gap-2">
-            {skill.technologies.map((tech, i) => (
-              <span key={i} className="bg-kali-gray px-2 py-1 text-sm rounded-sm text-kali-green">
-                {tech}
-              </span>
-            ))}
-          </div>
+    <div className="space-y-4">
+      <div>
+        {/* MATCHING MATRIX GREEN (text-green-400) */}
+        <div className="text-green-400 font-bold mb-1">Operating Systems</div>
+        <div className="text-gray-300">
+          Red Hat Enterprise Linux (RHEL) &nbsp; Kali Linux &nbsp; Ubuntu
         </div>
-      ))}
+      </div>
+
+      <div>
+        <div className="text-green-400 font-bold mb-1">Programming</div>
+        <div className="text-gray-300">
+          Python &nbsp; Bash Scripting &nbsp; SQL &nbsp; .NET Framework
+        </div>
+      </div>
+
+      <div>
+        <div className="text-green-400 font-bold mb-1">Networking & Cloud</div>
+        <div className="text-gray-300">
+          TCP/IP &nbsp; OSI Model &nbsp; DNS &nbsp; DHCP &nbsp; SSH
+        </div>
+      </div>
+
+      <div>
+        <div className="text-green-400 font-bold mb-1">Creative & Design</div>
+        <div className="text-gray-300">
+          Designing &nbsp; Video Editing &nbsp; Blender (3D Modeling)
+        </div>
+      </div>
     </div>
   );
 };

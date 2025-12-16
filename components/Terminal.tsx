@@ -226,31 +226,32 @@ const Terminal: React.FC = () => {
                 <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-kali-red mr-2"></div>
                 <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-kali-yellow mr-2"></div>
                 <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-kali-green"></div>
-                <span className="ml-auto text-gray-400 text-xs md:text-base select-none">root@jay:~</span>
+                {/* Header Prompt also changed to Red for consistency */}
+                <span className="ml-auto text-red-500 text-xs md:text-base select-none">root@jay:~</span>
             </div>
             <div ref={terminalRef} className="flex-1 p-4 overflow-y-auto terminal-scrollbar text-sm md:text-base">
                 {lines.map(line => (
                     <div key={line.id} className="mb-2">
                          {line.type === 'input' ? (
                              <div className="flex items-center flex-wrap">
-                                {/* Prompt */}
-                                <span className="text-blue-500 font-bold">root@jay</span>
+                                {/* USERNAME: RED */}
+                                <span className="text-red-500 font-bold">root@jay</span>
                                 <span className="text-white mx-0.5">:</span>
                                 <span className="text-blue-400">~</span>
                                 <span className="text-red-500 mr-2">#</span>
-                                {/* Input Text */}
+                                {/* User Input: Gray/White */}
                                 <span className="text-gray-200">{line.content}</span>
                              </div>
                          ) : (
-                            // UPDATED: Changed to gray-300 (Silver) for better readability
-                            <div className="whitespace-pre-wrap text-gray-300">{line.content}</div>
+                            // OUTPUT TEXT (Old welcome messages + commands): RED
+                            <div className="whitespace-pre-wrap text-red-500">{line.content}</div>
                          )
                          }
                     </div>
                 ))}
                 {!isWelcomeComplete && 
-                    // UPDATED: Typing effect text also changed to gray-300
-                    <div className="whitespace-pre-wrap text-gray-300">
+                    // TYPING ANIMATION (Current welcome message): RED
+                    <div className="whitespace-pre-wrap text-red-500">
                         <TypingEffect
                             key={welcomeLinesCount}
                             text={WELCOME_MESSAGES[welcomeLinesCount]}
@@ -263,7 +264,8 @@ const Terminal: React.FC = () => {
                  {isWelcomeComplete && (
                     <form onSubmit={handleSubmit} className="flex items-center flex-wrap">
                         <div className="flex items-center mr-2">
-                            <span className="text-blue-500 font-bold">root@jay</span>
+                            {/* INPUT PROMPT USERNAME: RED */}
+                            <span className="text-red-500 font-bold">root@jay</span>
                             <span className="text-white mx-0.5">:</span>
                             <span className="text-blue-400">~</span>
                             <span className="text-red-500">#</span>
