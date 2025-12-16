@@ -12,6 +12,13 @@ export interface Skill {
   technologies: string[];
 }
 
+export interface ContactInfo {
+  email: string;
+  linkedin: string;
+  github: string;
+  tryhackme: string;
+}
+
 export type Command = 'help' | 'about' | 'skills' | 'projects' | 'contact' | 'resume' | 'clear';
 
 export interface Line {

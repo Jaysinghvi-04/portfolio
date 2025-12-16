@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback, FormEvent, MouseEvent } from 'react';
 import { Line, Command } from '../types';
-import { WELCOME_MESSAGES, RESUME_LINK } from '../constants';
+import { WELCOME_MESSAGES } from '../constants'; 
 
 import Help from './sections/Help';
 import About from './sections/About';
@@ -83,7 +83,7 @@ const Terminal: React.FC = () => {
                 case 'contact':
                     return <Contact />;
                 case 'resume':
-                    window.open(RESUME_LINK, '_blank');
+                    window.open('/CV.pdf', '_blank');
                     return "Opening resume in new tab...";
                 case 'clear':
                     setLines([]);
@@ -208,7 +208,7 @@ const Terminal: React.FC = () => {
     
     return (
         <div 
-            className={`terminal-container absolute bg-kali-black/80 backdrop-blur-sm border-2 border-kali-gray shadow-lg shadow-kali-blue/20 rounded-lg flex flex-col font-mono text-sm md:text-base text-[#FFB000] transform transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+            className={`terminal-container absolute bg-kali-black/90 backdrop-blur-md border-2 border-kali-gray shadow-lg shadow-black/50 rounded-lg flex flex-col font-mono text-sm md:text-base text-gray-300 transform transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
             style={{
                 width: size.width > 0 ? `${size.width}px` : 'auto',
                 height: size.height > 0 ? `${size.height}px` : 'auto',
@@ -226,24 +226,31 @@ const Terminal: React.FC = () => {
                 <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-kali-red mr-2"></div>
                 <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-kali-yellow mr-2"></div>
                 <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-kali-green"></div>
-                <span className="ml-auto text-[#FFB000] text-xs md:text-base select-none">root@jay</span>
+                <span className="ml-auto text-gray-400 text-xs md:text-base select-none">root@jay:~</span>
             </div>
             <div ref={terminalRef} className="flex-1 p-4 overflow-y-auto terminal-scrollbar text-sm md:text-base">
                 {lines.map(line => (
                     <div key={line.id} className="mb-2">
                          {line.type === 'input' ? (
-                             <div className="flex items-center">
-                                <span className="text-[#FFB000] mr-2">[root@jay]~#</span>
-                                <span className="text-[#FFB000]">{line.content}</span>
+                             <div className="flex items-center flex-wrap">
+                                {/* Prompt */}
+                                <span className="text-blue-500 font-bold">root@jay</span>
+                                <span className="text-white mx-0.5">:</span>
+                                <span className="text-blue-400">~</span>
+                                <span className="text-red-500 mr-2">#</span>
+                                {/* Input Text */}
+                                <span className="text-gray-200">{line.content}</span>
                              </div>
                          ) : (
-                            <div className="whitespace-pre-wrap text-[#FFB000]">{line.content}</div>
+                            // UPDATED: Changed to gray-300 (Silver) for better readability
+                            <div className="whitespace-pre-wrap text-gray-300">{line.content}</div>
                          )
                          }
                     </div>
                 ))}
                 {!isWelcomeComplete && 
-                    <div className="whitespace-pre-wrap">
+                    // UPDATED: Typing effect text also changed to gray-300
+                    <div className="whitespace-pre-wrap text-gray-300">
                         <TypingEffect
                             key={welcomeLinesCount}
                             text={WELCOME_MESSAGES[welcomeLinesCount]}
@@ -254,13 +261,18 @@ const Terminal: React.FC = () => {
                 }
 
                  {isWelcomeComplete && (
-                    <form onSubmit={handleSubmit} className="flex items-center">
-                        <label htmlFor="command-input" className="text-[#FFB000] mr-2">[root@jay]~#</label>
+                    <form onSubmit={handleSubmit} className="flex items-center flex-wrap">
+                        <div className="flex items-center mr-2">
+                            <span className="text-blue-500 font-bold">root@jay</span>
+                            <span className="text-white mx-0.5">:</span>
+                            <span className="text-blue-400">~</span>
+                            <span className="text-red-500">#</span>
+                        </div>
                         <input
                             ref={inputRef}
                             id="command-input"
                             type="text"
-                            className="bg-transparent border-none text-[#FFB000] focus:outline-none w-full text-sm md:text-base"
+                            className="bg-transparent border-none text-gray-200 focus:outline-none flex-1 min-w-[50px] text-sm md:text-base"
                             value={inputValue}
                             onChange={(e) => setInputValue(e.target.value)}
                             onKeyDown={handleKeyDown}
@@ -271,7 +283,7 @@ const Terminal: React.FC = () => {
                             autoCorrect="off"
                             spellCheck="false"
                         />
-                         {isFocused && <span className="bg-[#FFB000] w-2 h-4 md:w-2.5 md:h-5 inline-block animate-pulse" />}
+                         {isFocused && <span className="bg-gray-200 w-2 h-4 md:w-2.5 md:h-5 inline-block animate-pulse ml-0.5" />}
                     </form>
                 )}
             </div>

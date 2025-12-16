@@ -16,47 +16,58 @@ export const BIO = `Greetings. I am ${YOUR_NAME}, a ${YOUR_PROFESSION} specializ
 
 export const PROJECTS: Project[] = [
   {
-    title: "EternalBlue Exploit Analysis (MS17-010)",
-    description: "Led a black-box penetration test on a Windows 7 system, successfully exploiting CVE-2017-0144 (EternalBlue) to gain SYSTEM-level privileges. Utilized the Metasploit Framework for reconnaissance, exploitation, and post-exploitation. Collaborators: Jay Singhvi, Khushi Jain.",
-    link: "https://github.com/your-username/eternalblue-pentest-report"
+    title: "Cloud Misconfiguration Scanner",
+    description: "Developed a Python-based tool to detect common security misconfigurations in cloud environments. Automated the auditing process for S3 buckets and IAM policies to identify public access risks and implemented reporting functionality to generate actionable security recommendations.",
+    link: ""
   },
   {
-    title: "Web Application Security Audit",
-    description: "Performed a security audit on a live web application, identifying critical vulnerabilities such as SQL Injection and Cross-Site Scripting (XSS). Provided a detailed report with remediation strategies.",
-    link: "https://github.com/your-username/web-app-audit"
+    title: "Network Port Scanner",
+    description: "Created a multi-threaded port scanner using Python’s socket library to identify open ports and services. Optimized scanning speed and implemented banner grabbing for OS detection.",
+    link: ""
   },
   {
-    title: "Custom Payload Development",
-    description: "Developed a custom Meterpreter payload using Python for a specific engagement scenario, designed to evade common signature-based antivirus detection.",
-    link: "https://github.com/your-username/custom-payloads"
+    title: "PROJO - Project Management Tool",
+    description: "Built a collaborative project management platform with secure user authentication. Implemented role-based access control (RBAC) to ensure data privacy between team members.",
+    link: ""
+  },
+  {
+    title: "Inventory Management System",
+    description: "Designed and developed a web application for efficient inventory management. Built both frontend and backend architectures to manage the relationship between the user interface and the SQL database.",
+    link: ""
+  },
+  {
+    title: "Model of Mustang",
+    description: "Developed a comprehensive 3D model of a Mustang car using Blender. Designed the exterior body and implemented animations and motion effects.",
+    link: ""
   }
 ];
 
 export const SKILLS: Skill[] = [
   {
-    category: "Penetration Testing",
-    technologies: ["Network Pentesting", "Web Application Pentesting", "Vulnerability Assessment", "Social Engineering"]
+    category: "Cybersecurity Tools",
+    technologies: ["Nmap", "Burp Suite", "Metasploit", "Wireshark", "Hydra"]
   },
   {
-    category: "Tools & Frameworks",
-    technologies: ["Metasploit", "Nmap", "Burp Suite", "Wireshark", "Kali Linux", "John the Ripper"]
+    category: "Operating Systems",
+    technologies: ["Red Hat Enterprise Linux (RHEL)", "Kali Linux", "Ubuntu"]
   },
   {
-    category: "Languages & Scripting",
-    technologies: ["Python", "Bash", "PowerShell", "C"]
+    category: "Programming",
+    technologies: ["Python", "Bash Scripting", "SQL", ".NET Framework"]
   },
   {
-    category: "Security Concepts",
-    technologies: ["TCP/IP", "Cryptography", "Windows & Linux Internals", "Active Directory Security"]
+    category: "Networking & Cloud",
+    technologies: ["TCP/IP", "OSI Model", "DNS", "DHCP", "SSH"]
   },
   {
-    category: "Platforms",
-    technologies: ["Docker", "VMware", "Git", "AWS Security"]
+    category: "Creative & Design",
+    technologies: ["Designing", "Video Editing", "Blender (3D Modeling)"]
   }
 ];
 
 export const CONTACT_INFO = {
   email: "jaysinghvi54@gmail.com",
   linkedin: "https://www.linkedin.com/in/jay-singhvi-9498a1339/",
-  github: "https://github.com/Jaysinghvi-04"
+  github: "https://github.com/Jaysinghvi-04",
+  tryhackme: "https://tryhackme.com/p/jaysinghvi54"
 };

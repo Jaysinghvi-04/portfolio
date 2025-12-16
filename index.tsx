@@ -15,3 +15,12 @@ root.render(
     <App />
   </React.StrictMode>
 );
+
+<a 
+  href="/CV.pdf" 
+  target="_blank" 
+  rel="noopener noreferrer"
+  className="text-blue-500 hover:underline" // specific for Tailwind CSS which you are using
+>
+  Download Resume
+</a>
